@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-10 mt-4">
+      <h1 class="text-center mb-3">Tus personajes favoritos de Rick y Morty!</h1>
+
+      <div class="col-lg-12 mb-4 d-flex justify-content-center">
+        <form [formGroup]="personajeForm" (ngSubmit)="onSubmit()" class="needs-validation col-lg-6" novalidate #formPersonaje>
+          <div class="mb-2 col-lg-7 input-group">
+
+            <input type="text" id="personaje" formControlName="personaje" class="form-control" required placeholder="Busca un personaje" ngClass="{{personajeForm.get('personaje')?.invalid && (personajeForm.get('personaje')?.touched) ?  'is-invalid' : ''}}" 
+            [formError]="personajeForm.get('personaje')?.hasError('minlength')!" [anchor]="formPersonaje">
+
+            <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+          </div>
+          
+        </form>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3" *ngFor="let character of characters">
+          <mat-card class="h-100">
+            <mat-card-header>
+              <mat-card-title class="break-title">{{character.name}}</mat-card-title>
+              <mat-card-subtitle>{{character.status}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="character.image"  alt="Photo of {{character.name}}">
+            <mat-card-content>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Species: {{character.species}}</li>
+                <li class="list-group-item">Gender: {{character.gender}}</li>
+                <li class="list-group-item">Origin: {{character.origin.name}}</li>
+                <li class="list-group-item">Location: {{character.location.name}}</li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+        
+      
+
+    </div>
+  </div>
+</div>
